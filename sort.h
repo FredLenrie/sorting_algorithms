@@ -1,20 +1,8 @@
 #ifndef SORT_H
 #define SORT_H
 
-#include <stdio.h>
 #include <stdlib.h>
-
-/*Comparison direction macros for bitonic sort*/
-#define UP 0
-#define DOWN 1
-
-/*enum bool - Enumeration of boolean values*/
-typedef enum bool
-{
-    false = 0,
-    true
-} bool;
-
+#include <stdio.h>
 
 /**
  * struct listint_s - Doubly linked list node
@@ -25,24 +13,32 @@ typedef enum bool
  */
 typedef struct listint_s
 {
-    const int n;
-    struct listint_s *prev;
-    struct listint_s *next;
+	const int n;
+	struct listint_s *prev;
+	struct listint_s *next;
 } listint_t;
 
-/*Helper for swapping*/
-void swap_ints(int *a, int *b);
-
-/*Printing helper functions */
+/* print_array.c */
 void print_array(const int *array, size_t size);
+
+/* print_list.c */
 void print_list(const listint_t *list);
 
-/*Regular functions prototypes*/
+/* 0-bubble_sort.c */
 void bubble_sort(int *array, size_t size);
+
+/* 1-insertion_sort_list.c */
 void insertion_sort_list(listint_t **list);
+
+/* 2-selection_sort.c */
 void selection_sort(int *array, size_t size);
+
+/* 3-quick_sort.c */
 void quick_sort(int *array, size_t size);
+int partition(int *array, int beg, int end, int size);
+void quickSort(int *array, int beg, int end, int size);
 
-
+/* 100-shell_sort.c */
+void shell_sort(int *array, size_t size);
 
 #endif

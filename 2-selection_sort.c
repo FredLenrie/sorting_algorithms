@@ -1,44 +1,41 @@
 #include "sort.h"
 
 /**
- * swap_ints - Swap two integers in an array.
- * @a: The first integer to swap.
- * @b: The second integer to swap.
- */
-void swap_ints(int *a, int *b)
-{
-	int tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-
-/**
- * selection_sort - Sort an array of integers in ascending order
- *                  using the selection sort algorithm.
- * @array: An array of integers.
- * @size: The size of the array.
+ * selection_sort - sorts an array of integers in ascending order
+ * using the Selection sort algorithm
+ * prints the array after each time you swap two elements
  *
- * Description: Prints the array after each swap.
+ * @array: array of integers to be sorted
+ * @size: number of integers in array
  */
 void selection_sort(int *array, size_t size)
 {
-	int *min;
-	size_t i, j;
+	size_t i, j, j_min;
+	int temp;
 
-	if (array == NULL || size < 2)
+	/* An array does not need to be sorted if its size is less than 2 */
+	if (size < 2)
 		return;
 
-	for (i = 0; i < size - 1; i++)
+	for (i = 0; i < size; i++)
 	{
-		min = array + i;
-		for (j = i + 1; j < size; j++)
-			min = (array[j] < *min) ? (array + j) : min;
+		j_min = i;
 
-		if ((array + i) != min)
+		for (j = i + 1; j < size; j++)
 		{
-			swap_ints(array + i, min);
+			/* find the smallest integer in the rest of the array */
+			if (array[j] < array[j_min])
+				j_min = j;
+		}
+
+		/* put the smallest value in the beginning of the unsorted part */
+		if (j_min != i)
+		{
+			temp = array[i];
+			array[i] = array[j_min];
+			array[j_min] = temp;
+
+			/* print the array */
 			print_array(array, size);
 		}
 	}
